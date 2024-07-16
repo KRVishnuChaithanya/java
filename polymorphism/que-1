@@ -1,0 +1,42 @@
+class shape {
+    public void calculatearea() {
+        System.out.println("Shape's area");
+    }
+}
+
+class rectangle extends shape {
+    public void calculatearea(int l, int b) {
+        int area = l * b;
+        System.out.println("Area of rectangle: " + area);
+    }
+}
+
+class circle extends shape {
+    public void calculatearea(double r) {
+        double area = 3.14 * r * r;
+        System.out.println("Area of circle: " + area);
+    }
+}
+
+class triangle extends shape {
+    public void calculatearea(int b, int h) {
+        double area = 0.5 * b * h;
+        System.out.println("Area of triangle: " + area);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        shape s1 = new shape();
+        s1.calculatearea(); // Prints "Shape's area"
+        
+        rectangle r1 = new rectangle();
+        r1.calculatearea(5, 7); // Prints "Area of rectangle: 35"
+        
+        circle c1 = new circle();
+        c1.calculatearea(4.5); // Prints "Area of circle: 63.585"
+        
+        triangle t1 = new triangle();
+        t1.calculatearea(3, 7); // Prints "Area of triangle: 10.5"
+    }
+}
