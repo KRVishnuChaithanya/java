@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class ExpenseTracker {
+    private List<String> categories;
+    private List<List<Double>> expenses;
+
+    public ExpenseTracker() {
+        this.categories = new ArrayList<>();
+        this.expenses = new ArrayList<>();
+    }
+
+    public void addExpense(String description, double amount, String category) {
+        int index = categories.indexOf(category);
+        if (index == -1) {
+            categories.add(category);
+            expenses.add(new ArrayList<>());
+            index = categories.size() - 1;
+        }
+        expenses.get(index).add(amount);
+    }
+
+    public List<Double> viewExpensesByCategory(String category) {
+        int index = categories.indexOf(category);
+        return (index != -1) ? expenses.get(index) : new ArrayList<>();
+    }
+
+    public void generateExpenseReport() {
+        for (int i = 0; i < categories.size(); i++) {
+            String category = categories.get(i);
+            List<Double> categoryExpenses = expenses.get(i);
+
+            double totalExpenses = categoryExpenses.stream().mapToDouble(Double::doubleValue).sum();
+            System.out.println("Category: " + category);
+            System.out.println("Total Expenses: $" + totalExpenses);
+        }
+    }
+
+    public static void main(String[] args) {
+        ExpenseTracker tracker = new ExpenseTracker();
+        tracker.addExpense("Groceries", 50.0, "Food");
+        tracker.addExpense("Internet Bill", 70.0, "Utilities");
+        tracker.addExpense("Dinner", 30.0, "Food");
+
+        System.out.println("Expenses for Food category: " + tracker.viewExpensesByCategory("Food"));
+        tracker.generateExpenseReport();
+    }
+}
